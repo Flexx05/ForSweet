@@ -41,6 +41,12 @@ function App() {
 
   const [currentTime, setCurrentTime] = useState(new Date());
   const [dayOfWeek, setDayOfWeek] = useState("");
+  const vnFormat = (date) => {
+    const yyyy = date.getFullYear();
+    const mm = date.getMonth() + 1;
+    const dd = date.getDate();
+    return `${dd} ~ ${mm} ~ ${yyyy}`;
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -50,7 +56,7 @@ function App() {
     const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const today = new Date();
     setDayOfWeek(days[today.getDay()]);
-    return () => clearInterval(interval); // Dọn dẹp khi component unmount
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -61,7 +67,7 @@ function App() {
             <img src="../images/FS-logo.png" alt="" />
           </a>
           <p className="text-[30px] text-white lily-script-one">
-            {dayOfWeek}, {currentTime.toLocaleDateString()}
+            {dayOfWeek}, {vnFormat(currentTime)}
           </p>
         </div>
       </nav>
